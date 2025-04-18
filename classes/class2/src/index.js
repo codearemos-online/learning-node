@@ -1,3 +1,3 @@
 const {emailTemplate} = require("./01-emailTemplate")
-require("./02-destructuring")
+require("./03-depuring")
 
