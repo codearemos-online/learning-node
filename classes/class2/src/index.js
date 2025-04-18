@@ -1,6 +1,6 @@
-const {getUserById} = require("./04-callbacks")
+const {getUserById} = require("./05-arrow")
 
-getUserById(4, function(error,user){
+getUserById(3, function(error,user){
     if(error){
         return console.log(error)
     }
