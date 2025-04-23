@@ -1,7 +1,8 @@
+const {http} = require("../plugins")
 const getPokemonById  = async (id) => {
-    let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    let data = await res.json()
-    return data.name;
+   
+    const res = await http.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    return res.name;
 }
 
 module.exports = getPokemonById
