@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "exercises:factory-function":"nodemon src/06-factory-functions-exercises.js"
   },
   "author": "Diego Beltran",
   "license": "ISC",
