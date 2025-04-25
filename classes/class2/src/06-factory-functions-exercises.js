@@ -1,5 +1,6 @@
 const { createCounter } = require("../exercises/factory-functions/create-counter");
 const { createUser } = require("../exercises/factory-functions/create-user");
+const { createRole } = require("../exercises/factory-functions/create-role");
 
 //Exercise 1
 /** 
@@ -19,3 +20,13 @@ const { createUser } = require("../exercises/factory-functions/create-user");
 
     console.log(number.getNumber());
 */
+
+//Exercise 3
+
+const admin = createRole("admin");
+const user = createRole("user");
+
+console.log(admin.havePermissions());
+console.log(user.havePermissions());
+
+
