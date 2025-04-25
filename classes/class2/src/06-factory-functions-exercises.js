@@ -1,6 +1,5 @@
-const { createCounter } = require("../exercises/factory-functions/create-counter");
-const { createUser } = require("../exercises/factory-functions/create-user");
-const { createRole } = require("../exercises/factory-functions/create-role");
+const { createCounter, createUser, createRole, createConection} = require("../exercises/factory-functions");
+
 
 //Exercise 1
 /** 
@@ -23,10 +22,19 @@ const { createRole } = require("../exercises/factory-functions/create-role");
 
 //Exercise 3
 
-const admin = createRole("admin");
-const user = createRole("user");
+/** 
+    const admin = createRole("admin");
+    const user = createRole("user");
 
-console.log(admin.havePermissions());
-console.log(user.havePermissions());
+    console.log(admin.havePermissions());
+    console.log(user.havePermissions());
+*/
 
+//Exercise 4
+
+
+    const conexion = createConection();
+    conexion.connect();
+    conexion.disconnect();
+    
 
