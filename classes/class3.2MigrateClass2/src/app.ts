@@ -1,3 +1,3 @@
-import { emailTemplate } from './01-emailTemplate';
+import { PUBLIC } from './02-destructuring';
 
-console.log(emailTemplate())
+console.table(PUBLIC)
