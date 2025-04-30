@@ -1,5 +1,13 @@
-import {uuidv4} from './plugins';
+import { http } from './plugins';
 
-const uuid = uuidv4()
+const getPokemonById = async(id:number) => {
+    const pokemon = await http.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    return pokemon
+}
 
-console.log(uuid)
+const main = async () => {
+    const pokemon = await getPokemonById(1);
+    console.log(pokemon.name)
+}
+
+main()
