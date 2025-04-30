@@ -1,6 +1,5 @@
-import { buildLogger } from './plugins/logger.plugin';
+import {getAge} from './plugins';
 
-const logger = buildLogger(`app`);
+const age = getAge('1996/03/27')
 
-logger.log(`Hello World Diego`);
-logger.error(`Error linea`);
+console.log(age)
