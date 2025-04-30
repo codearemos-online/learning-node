@@ -1,13 +1,3 @@
-import { http } from './plugins';
+import { emailTemplate } from './01-emailTemplate';
 
-const getPokemonById = async(id:number) => {
-    const pokemon = await http.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    return pokemon
-}
-
-const main = async () => {
-    const pokemon = await getPokemonById(1);
-    console.log(pokemon.name)
-}
-
-main()
+console.log(emailTemplate())
