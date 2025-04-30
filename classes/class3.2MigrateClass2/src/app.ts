@@ -1,5 +1,5 @@
-import {getAge} from './plugins';
+import {uuidv4} from './plugins';
 
-const age = getAge('1996/03/27')
+const uuid = uuidv4()
 
-console.log(age)
+console.log(uuid)
