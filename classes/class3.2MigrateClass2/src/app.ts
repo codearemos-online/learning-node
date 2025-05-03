@@ -1,6 +1,6 @@
-import { getUserById } from "./04-callback"
+import { getUserById } from "./05-arrow"
 
-getUserById(10,function(user,error){
+getUserById(2,function(user,error){
  console.log(user)
 })
 
