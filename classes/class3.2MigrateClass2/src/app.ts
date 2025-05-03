@@ -1,7 +1,5 @@
-import { makeGetUser } from "./06-factory-function"
-import { getAge, uuidv4 } from "./plugins"
+import { getPokemonById } from "./07-promises"
 
-const getUser = makeGetUser(getAge, uuidv4)
-
-console.log(getUser({name: "John", lastname: "Doe", birthdate: "1996-03-27"}))
-
+getPokemonById(5).then((pokemon) => {
+    console.log(pokemon)
+})
