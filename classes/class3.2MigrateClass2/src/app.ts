@@ -1,6 +1,5 @@
-import { getUserById } from "./04-callback"
+import { getPokemonById } from "./07-promises"
 
-getUserById(10,function(user,error){
- console.log(user)
+getPokemonById(5).then((pokemon) => {
+    console.log(pokemon)
 })
-
