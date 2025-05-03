@@ -1,6 +1,7 @@
-import { getUserById } from "./05-arrow"
+import { makeGetUser } from "./06-factory-function"
+import { getAge, uuidv4 } from "./plugins"
 
-getUserById(2,function(user,error){
- console.log(user)
-})
+const getUser = makeGetUser(getAge, uuidv4)
+
+console.log(getUser({name: "John", lastname: "Doe", birthdate: "1996-03-27"}))
 
