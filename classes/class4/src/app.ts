@@ -1,1 +1,5 @@
-console.log("Hello World");
+import { emailTemplate } from "./01-emailTemplate";
+
+console.log(emailTemplate)
+
+
