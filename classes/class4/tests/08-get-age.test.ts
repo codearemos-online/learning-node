@@ -6,11 +6,10 @@ describe("age test", () => {
         expect(age).toBe(29)
     })
 
-    it("should_return_a_error", () => {
-        try {
-            const age = getAge();
-        } catch (error) {
-            expect(error).toBe("El birthdate es obligatorio")
-        }
-    })
+   it("should return a value 0",() => {
+    const spy = jest.spyOn(Date.prototype,"getFullYear").mockReturnValue(1960);
+    const date = "1960-01-01";
+    const age = getAge(date);
+    expect(age).toBe(0)
+   })
 })
