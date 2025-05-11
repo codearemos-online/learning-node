@@ -6,7 +6,7 @@ const httpClientPlugin = {
             return data;
         }
         catch (error) {
-            console.log("Pokemon not found")
+            throw ("Pokemon not found")
         }
     }
 }
