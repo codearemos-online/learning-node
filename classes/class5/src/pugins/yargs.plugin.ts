@@ -14,4 +14,8 @@ export const yarg = yargs(hideBin(process.argv))
                         demandOption:true,
                         description:"Limit multiplication number"
                     })
+                    .check((argv,options) => {
+                        if(argv.b < 2) throw "B should be greater than 2"
+                        return true;
+                    })
                     .parseSync();
