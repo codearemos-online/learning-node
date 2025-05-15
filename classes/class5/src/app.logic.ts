@@ -1,16 +1,17 @@
 import fs from "fs"
+import { yarg } from './pugins/yargs.plugin'
 
 fs.write
 
-const table = 6;
+const table = yarg.b;
 
 let content = `
 ==============================
 Tabla del ${table}
 ============================== 
 `;
-for(let i = 0; i <= 10; i++){
-    content += `${i} X ${table} = ${i * table}\n`;
+for(let i = 0; i <= yarg.l; i++){
+    content += `${table} X ${i} = ${i * table}\n`;
 }
 
 const outputPath = "outputs/";
