@@ -1,5 +1,10 @@
 import { yarg } from "../src/pugins/yargs.plugin"
 
-( async () => {
-    console.log("Execute")
+const main = async () => {
+    console.log(yarg)
+}
+
+(async () => {
+    await main();
 })()
+
