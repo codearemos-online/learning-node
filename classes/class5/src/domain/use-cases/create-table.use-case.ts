@@ -13,11 +13,10 @@ export class CreateTable implements CreateTableUseCase {
     }
 
     execute({ base, limit }:CreateTableOptions) {
-        let content = ` ==============================
-            Tabla del ${base}
-            ============================== `;
-        for (let i = 0; i <= limit; i++) {
-            content += `${base} X ${i} = ${i * base}\n`;
+        let content = '';
+        for (let i = 1; i <= limit; i++) {
+            content += `${base} X ${i} = ${i * base}`;
+            if(i < limit) content += `\n`
         }
 
         return content;
