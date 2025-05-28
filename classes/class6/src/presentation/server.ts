@@ -8,9 +8,13 @@ export class Server {
         CronService.createJob(
             '*/2 * * * * *',
             async () => {
-                const data = new CheckService();
+                const data = new CheckService(
+                    () => console.log(`Server is ok`),
+                    (error) => console.log(error) 
+                );
                 
-                console.log(await data.execute('https://googleasa.com'));
+                //console.log(await data.execute('https://google.com'));
+                console.log(await data.execute('http://localhost:3000'));
             }
         );
     }
