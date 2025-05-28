@@ -10,7 +10,8 @@ export class Server {
             async () => {
                 const data = new CheckService();
                 
-                console.log(await data.execute('https://googleasa.com'));
+                //console.log(await data.execute('https://google.com'));
+                console.log(await data.execute('http://localhost:3000'));
             }
         );
     }
