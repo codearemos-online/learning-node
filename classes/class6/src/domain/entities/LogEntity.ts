@@ -1,3 +1,5 @@
+import { create } from "domain";
+
 export enum LogSeverityLevel {
     low    = 'low',
     medium = 'medium',
@@ -16,5 +18,13 @@ export class LogEntity{
         this.level = level;
         this.message = message;
         this.createdAt = new Date();
+    }
+
+    static fromjSON = (json:string):LogEntity => {
+      const {level,message,createdAt} = JSON.parse(json);
+      const log = new LogEntity(level,message);
+      log.createdAt = new Date(createdAt);
+
+      return log;
     }
 }
