@@ -1,3 +1,4 @@
+import { envs } from "./config/plugins/envs.plugins";
 import { Server } from "./presentation/server";
 import 'dotenv/config';
 
@@ -6,6 +7,6 @@ import 'dotenv/config';
 })();
 
 function main() {
-    console.log(process.env.PORT)
+    console.log(envs)
    // Server.main();
 }
