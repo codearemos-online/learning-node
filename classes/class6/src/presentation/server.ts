@@ -1,6 +1,9 @@
 import { CheckService } from "../domain/use-cases/checks/check-service";
+import { FileSystemDataSource } from "../infraestructure/datasources/file-system.datasource";
+import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { CronService } from "./services/cron-service";
 
+const fileSystemLogRepository = new LogRepositoryImpl(new FileSystemDataSource());
 export class Server {
     public static main() {
         console.log("Server is running");
@@ -9,6 +12,7 @@ export class Server {
             '*/2 * * * * *',
             async () => {
                 const data = new CheckService(
+                    fileSystemLogRepository,
                     () => console.log(`Server is ok`),
                     (error) => console.log(error) 
                 );
