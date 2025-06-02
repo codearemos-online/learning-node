@@ -5,10 +5,10 @@ import fs from 'fs';
 export class FileSystemDataSource implements LogDataSource {
 
     private readonly logsPath = 'logs/';
-    private readonly allLogsPath = 'logs-all.log'
-    private readonly lowLogsPath = 'logs-low.log';
-    private readonly mediumLogsPath = 'logs-medium.log';
-    private readonly highLogsPath = 'logs-high.log';
+    private readonly allLogsPath = 'logs/logs-all.log'
+    private readonly lowLogsPath = 'logs/logs-low.log';
+    private readonly mediumLogsPath = 'logs/logs-medium.log';
+    private readonly highLogsPath = 'logs/logs-high.log';
 
     constructor() {
         this.createLogsFile();
