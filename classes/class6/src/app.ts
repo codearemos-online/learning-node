@@ -1,9 +1,11 @@
 import { Server } from "./presentation/server";
+import 'dotenv/config';
 
 (() => {
     main();
 })();
 
 function main() {
-    Server.main();
+    console.log(process.env.PORT)
+   // Server.main();
 }
