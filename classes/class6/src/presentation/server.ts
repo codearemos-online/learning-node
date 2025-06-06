@@ -1,4 +1,6 @@
+import { LogRepository } from "../domain/repository/log.repository";
 import { CheckService } from "../domain/use-cases/checks/check-service";
+import { SendLogEmail } from "../domain/use-cases/email/send-log-email";
 import { FileSystemDataSource } from "../infraestructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { EmailService } from "./email/email.service";
@@ -10,10 +12,11 @@ export class Server {
         console.log("Server is running");
        
         const emailService = new EmailService();
+        const sendLogEmail = new SendLogEmail(
+            fileSystemLogRepository,
+            emailService
+        ).execute(['dbeltrandev@gmail.com']);
 
-        emailService.sendEmailBySystemLogs(['dbeltrandev@gmail.com'])
-
-      
         //CronService.createJob(
         //    '*/2 * * * * *',
         //    async () => {
