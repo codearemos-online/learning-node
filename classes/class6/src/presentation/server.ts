@@ -10,12 +10,10 @@ export class Server {
         console.log("Server is running");
        
         const emailService = new EmailService();
-        emailService.sendEmail({
-            to:'dbeltrandev@gmail.com',
-            subject:'prueba de logs',
-            htmlBody:`<h3>Prueba de email</h3>`
-        });
 
+        emailService.sendEmailBySystemLogs(['dbeltrandev@gmail.com'])
+
+      
         //CronService.createJob(
         //    '*/2 * * * * *',
         //    async () => {
