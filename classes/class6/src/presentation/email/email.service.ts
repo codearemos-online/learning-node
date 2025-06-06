@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import { envs } from '../../config/plugins/envs.plugins';
+import { LogRepository } from '../../domain/repository/log.repository';
+import { LogEntity, LogSeverityLevel } from '../../domain/entities/LogEntity';
 
 export interface EmailOptions {
     to: string | string[],
@@ -14,6 +16,10 @@ export interface Attachment {
 }
 
 export class EmailService {
+
+    constructor(private readonly logRepository:LogRepository){
+    }
+    
     private transporter = nodemailer.createTransport({
         service: envs.MAIL_SERVICE,
         auth: {
@@ -31,10 +37,20 @@ export class EmailService {
                 html: htmlBody,
                 attachments
             })
-            console.log('Prueba Diego')
-            console.log(sendInfo)
+            const logEntity = new LogEntity({
+                message:'Email sent',
+                level:LogSeverityLevel.low,
+                origin:'EmailService'
+            }) 
+            this.logRepository.saveLog(logEntity)
             return true;
         } catch (error) {
+             const logEntity = new LogEntity({
+                message:`Error sending email ${error}`,
+                level:LogSeverityLevel.high,
+                origin:'EmailService'
+            }) 
+            this.logRepository.saveLog(logEntity)
             return false;
         }
     }
