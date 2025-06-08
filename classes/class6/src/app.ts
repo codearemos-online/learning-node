@@ -16,15 +16,19 @@ async function main() {
     })
 
     //create a collection = tables, document = registry
-    const newLog = await LogModel.create({
-        message:'Welcome to send data',
-        origin:'app.ts'
-    })
+    /*
+        const newLog = await LogModel.create({
+            message:'Welcome to send data',
+            origin:'app.ts'
+        })
 
-    await newLog.save();
+        await newLog.save();
 
-    console.log(newLog)
+        console.log(newLog)
+    */
 
+    const logs = await LogModel.find();
+    console.log(logs)
 
 
     //Server.main();    
