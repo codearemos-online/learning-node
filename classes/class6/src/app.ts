@@ -1,5 +1,5 @@
 import { envs } from "./config/plugins/envs.plugins";
-import { MongoConnection } from "./data/mongo/init";
+import { MongoConnection } from "./data/mongodb";
 import { Server } from "./presentation/server";
 import 'dotenv/config';
 
