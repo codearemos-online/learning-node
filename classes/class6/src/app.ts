@@ -1,4 +1,5 @@
 import { envs } from "./config/plugins/envs.plugins";
+import { MongoConnection } from "./data/mongo/init";
 import { Server } from "./presentation/server";
 import 'dotenv/config';
 
@@ -6,7 +7,12 @@ import 'dotenv/config';
     main();
 })();
 
-function main() {
+async function main() {
     //console.log(envs)
-   Server.main();
+   
+   MongoConnection.connect({
+    mongoUrl:envs.MONGO_URL,
+    dbName:envs.MONGO_DB_NAME
+   })
+    //Server.main();    
 }
