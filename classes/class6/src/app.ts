@@ -27,9 +27,9 @@ async function main() {
         console.log(newLog)
     */
 
-    const logs = await LogModel.find();
-    console.log(logs)
+    //const logs = await LogModel.find();
+    //console.log(logs)
 
 
-    //Server.main();    
+    Server.main();    
 }
