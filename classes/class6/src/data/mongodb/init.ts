@@ -12,9 +12,8 @@ export class MongoConnection {
             await mongoose.connect(mongoUrl,{
             dbName
         })
-        console.log('Connection success')
+        return true;
         }catch(error){
-            console.log(error);
             throw 'No se ha podido conectar a la BD';
         }
     }
