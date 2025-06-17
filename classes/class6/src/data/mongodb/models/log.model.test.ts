@@ -21,7 +21,7 @@ describe('logModel', () => {
         const log = await LogModel.create(data)
         expect(log).toEqual(expect.objectContaining({
             ...data,
-            id:expect.any(String)
+            id: expect.any(String)
         }))
         expect(log.message).toEqual(data.message)
 
@@ -29,5 +29,17 @@ describe('logModel', () => {
             ...data
         })
 
+    })
+
+    it('should return a schema object', () => {
+        const schema = LogModel.schema.obj;
+        expect(schema).toMatchObject({
+            level: {
+                type: expect.any(Function)
+            },
+            message: expect.any(Object),
+            origin: expect.any(Function),
+            createdAt: expect.any(Object)
+        })
     })
 })
