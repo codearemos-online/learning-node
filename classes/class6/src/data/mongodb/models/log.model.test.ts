@@ -29,6 +29,8 @@ describe('logModel', () => {
             ...data
         })
 
+        await LogModel.findByIdAndDelete(log.id);
+
     })
 
     it('should return a schema object', () => {
