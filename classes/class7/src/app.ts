@@ -1,8 +1,11 @@
-import http from 'http';
+import http2 from 'http2';
 import fs from 'fs';
 import path from 'path';
 
-const server = http.createServer((req,res) => {
+const server = http2.createSecureServer({
+    key:fs.readFileSync('./keys/server.key'),
+    cert:fs.readFileSync('./keys/server.crt')
+},(req,res) => {
     const html = fs.readFileSync(path.join(__dirname , '..', 'public', 'index.html'), 'utf-8')
     const data = {
         title: 'Hello World',
