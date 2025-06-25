@@ -11,3 +11,4 @@ postgres/
 /generated/prisma
 mongo-test/
 postgres-test/
+keys/
