@@ -1,21 +1,12 @@
 import { Router } from "express";
+import { TodoController } from "./todos/controller";
 
 export class AppRouter{
     static routes():Router{
         const router = Router();
+        const todoController = new TodoController();
 
-        router.get('/api/todos', (req, res) => {
-            res.json([
-                {
-                    'id': 1,
-                    'task': 'buy milk'
-                },
-                {
-                    'id': 2,
-                    'task': 'buy bread'
-                },
-            ])
-        })
+        router.get('/api/todos', todoController.getTodos)
 
 
         return router;
