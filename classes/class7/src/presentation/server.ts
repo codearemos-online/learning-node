@@ -1,18 +1,22 @@
-import express from 'express';
+import express, { Router } from 'express';
 import path from 'path';
 
 interface Options {
     port: number;
     publicPath: string;
+    routes:Router;
 }
 
 export class Server {
 
     private readonly port: number;
     private readonly publicPath: string;
+    private readonly routes:Router;
     constructor(private options: Options) {
         this.port = options.port;
         this.publicPath = options.publicPath;
+        this.routes = options.routes;
+
     }
 
     private app = express();
@@ -21,18 +25,8 @@ export class Server {
         this.app.use(express.static('public'))
 
         /** ROUTES */
-        this.app.get('/api/todos', (req, res) => {
-            res.json([
-                {
-                    'id': 1,
-                    'task': 'buy milk'
-                },
-                {
-                    'id': 2,
-                    'task': 'buy bread'
-                },
-            ])
-        })
+        this.app.use(this.routes);
+        
 
         this.app.get('/*splat', (req, res) => {
             const indexPath = path.join(__dirname, '..', '..', this.publicPath, 'index.html')
