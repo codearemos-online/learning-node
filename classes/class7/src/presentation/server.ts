@@ -1,24 +1,32 @@
-import express from 'express';
+import express, { Router } from 'express';
 import path from 'path';
 
 interface Options {
     port: number;
     publicPath: string;
+    routes:Router;
 }
 
 export class Server {
 
     private readonly port: number;
     private readonly publicPath: string;
-    constructor(private  options: Options) {
+    private readonly routes:Router;
+    constructor(private options: Options) {
         this.port = options.port;
         this.publicPath = options.publicPath;
+        this.routes = options.routes;
+
     }
 
     private app = express();
 
     start() {
         this.app.use(express.static('public'))
+
+        /** ROUTES */
+        this.app.use(this.routes);
+        
 
         this.app.get('/*splat', (req, res) => {
             const indexPath = path.join(__dirname, '..', '..', this.publicPath, 'index.html')
