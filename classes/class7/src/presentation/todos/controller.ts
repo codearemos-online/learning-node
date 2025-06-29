@@ -9,7 +9,7 @@ export class TodoController {
             },
             {
                 'id': 2,
-                'task': 'buy breads'
+                'task': 'buy bread'
             },
         ])
     }
