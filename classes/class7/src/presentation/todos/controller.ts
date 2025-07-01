@@ -39,5 +39,15 @@ export class TodoController {
         }
     }
 
+    createTodo = (req: Request, res: Response) => {
+        const { task } = req.body;
+        const newTodo = {
+            id: todos.length + 1,
+            task
+        }
+        todos.push(newTodo)
+        res.status(201).json(newTodo)
+    }
+
 
 }
