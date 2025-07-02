@@ -56,5 +56,26 @@ export class TodoController {
         res.status(201).json(newTodo)
     }
 
+    updateTodo = (req:Request,res:Response) => {
+        const { id } = req.params;
+        const { task } = req.body;
+
+        if(!task){
+            res.status(400).json({
+                message: 'task is required'
+            })
+        }
+
+        const todo = todos.find((todo) => todo.id == parseInt(id))
+        if(!todo){
+            res.status(404).json({
+                message: 'todo not found'
+            })
+        }
+
+        todo!.task = task
+        res.json(todo)
+    }
+
 
 }
