@@ -41,6 +41,13 @@ export class TodoController {
 
     createTodo = (req: Request, res: Response) => {
         const { task } = req.body;
+
+        if(!task){
+            res.status(400).json({
+                message: 'task is required'
+            })
+        }
+
         const newTodo = {
             id: todos.length + 1,
             task
