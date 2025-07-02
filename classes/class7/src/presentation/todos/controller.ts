@@ -73,7 +73,7 @@ export class TodoController {
             })
         }
 
-        todo!.task = task
+        todo!.task = task || todo!.task	
         res.json(todo)
     }
 
