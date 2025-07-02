@@ -57,6 +57,13 @@ export class TodoController {
     }
 
     updateTodo = (req:Request,res:Response) => {
+
+        if(isNaN(parseInt(req.params.id))){
+            res.status(400).json({
+                message: 'id is not valid'
+            })
+        }
+
         const { id } = req.params;
         const { task } = req.body;
 
