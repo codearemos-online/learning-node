@@ -57,6 +57,13 @@ export class TodoController {
     }
 
     updateTodo = (req:Request,res:Response) => {
+
+        if(isNaN(parseInt(req.params.id))){
+            res.status(400).json({
+                message: 'id is not valid'
+            })
+        }
+
         const { id } = req.params;
         const { task } = req.body;
 
@@ -73,8 +80,30 @@ export class TodoController {
             })
         }
 
-        todo!.task = task
+        todo!.task = task || todo!.task	
         res.json(todo)
+    }
+
+    deleteTodo = (req:Request,res:Response) => {
+        const { id } = req.params;
+        const numberId = parseInt(id)
+        if(isNaN(numberId)){
+            res.status(400).json({
+                message: 'id is not valid'
+            })
+        }
+        const task = todos.find((todo) => todo.id == parseInt(id));
+
+        if(!task){
+            res.status(404).json({
+                message: 'todo not found'
+            })
+        }
+
+        todos.splice(todos.indexOf(task!),1)
+        res.json({
+            message: 'todo deleted'
+        })
     }
 
 
