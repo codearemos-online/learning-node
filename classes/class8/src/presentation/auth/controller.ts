@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { RegisterUserDto } from '../../domain';
 
 export class AuthController {
 
@@ -11,7 +12,11 @@ export class AuthController {
     }
 
     register(req: Request, res: Response){
-
+        const {name,email,password} = req.body;
+        const userDto = RegisterUserDto.create(req.body)
+        res.json({
+            data:userDto
+        });
     }
 
     validateEmail(req: Request, res: Response){
