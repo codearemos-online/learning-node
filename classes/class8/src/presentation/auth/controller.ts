@@ -1,22 +1,30 @@
 import { Request, Response } from 'express';
-import { RegisterUserDto } from '../../domain';
+import { CustomError, RegisterUserDto } from '../../domain';
+import { AuthService } from '../../domain/services/auth.service';
+
 
 export class AuthController {
 
-    constructor(){}
+    constructor(
+        public readonly authService:AuthService
+    ){}
 
-    login(req: Request, res: Response){
+    login = (req: Request, res: Response) =>{
         res.json({
             message: 'Login'
         });
     }
 
-    register(req: Request, res: Response){
-        const {name,email,password} = req.body;
-        const userDto = RegisterUserDto.create(req.body)
-        res.json({
-            data:userDto
-        });
+    register = (req: Request, res: Response) => {
+        const userRegisterDto = RegisterUserDto.create(req.body)
+        const [error,userDto] = userRegisterDto; 
+
+        if(error) res.status(400).json({error})
+    
+        this.authService.registerUser(userDto!)
+        .then((user) => res.json(user))
+        
+     
     }
 
     validateEmail(req: Request, res: Response){
