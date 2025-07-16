@@ -11,7 +11,13 @@ export class AuthService{
 
         if(user) throw CustomError.badRequest("email already exists")
 
-        return userDto;
+        try{
+            const user = new UserModel(userDto)
+            await user.save();
+            return user
+        }catch(error){
+            throw CustomError.internalServerError("error creating user")
+        }
         
     }
 }
