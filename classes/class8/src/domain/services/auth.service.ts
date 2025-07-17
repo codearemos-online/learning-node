@@ -1,5 +1,6 @@
 import { UserModel } from "../../data";
 import { RegisterUserDto } from "../dtos/auth/register-user.dto";
+import { UserEntity } from "../entities/user.entity";
 import { CustomError } from "../errors/custom.error";
 
 export class AuthService{
@@ -14,7 +15,9 @@ export class AuthService{
         try{
             const user = new UserModel(userDto)
             await user.save();
-            return user
+            const userEntity = UserEntity.fromObject(user);
+            const {password, ...userWithoutPassword} = userEntity;
+            return userWithoutPassword;
         }catch(error){
             throw CustomError.internalServerError("error creating user")
         }
