@@ -5,6 +5,14 @@ import { AuthService } from '../../domain/services/auth.service';
 
 export class AuthController {
 
+    private handleError(error:unknown,res:Response){
+        if(error instanceof CustomError){
+            res.status(error.statusCode).json({message:error.message})
+        }else{
+            res.status(500).json({message:"internal server error"})
+        }
+    }
+
     constructor(
         public readonly authService:AuthService
     ){}
@@ -23,7 +31,7 @@ export class AuthController {
     
         this.authService.registerUser(userDto!)
         .then((user) => res.json(user))
-        
+        .catch((error) => this.handleError(error,res))
      
     }
 
