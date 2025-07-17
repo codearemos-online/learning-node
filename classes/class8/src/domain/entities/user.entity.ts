@@ -11,7 +11,7 @@ export class UserEntity {
         public readonly img?: string,
     ) {}
 
-    fromObject(object:{[key:string]:any}){
+    static fromObject(object:{[key:string]:any}){
         const {id,_id,name, email,emailVerified, password, role, img} = object;
 
         if(!id && !_id){
