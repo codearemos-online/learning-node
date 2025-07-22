@@ -2,6 +2,7 @@ import { UserModel } from "../../data";
 import { RegisterUserDto } from "../dtos/auth/register-user.dto";
 import { UserEntity } from "../entities/user.entity";
 import { CustomError } from "../errors/custom.error";
+import { bcryptAdapter } from "../../config";
 
 export class AuthService{
     constructor(){}
@@ -14,6 +15,7 @@ export class AuthService{
 
         try{
             const user = new UserModel(userDto)
+            user.password = await bcryptAdapter.hash(user.password)
             await user.save();
             const userEntity = UserEntity.fromObject(user);
             const {password, ...userWithoutPassword} = userEntity;
