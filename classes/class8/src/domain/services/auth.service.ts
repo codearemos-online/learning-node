@@ -3,6 +3,7 @@ import { RegisterUserDto } from "../dtos/auth/register-user.dto";
 import { UserEntity } from "../entities/user.entity";
 import { CustomError } from "../errors/custom.error";
 import { bcryptAdapter } from "../../config";
+import { LoginUserDto } from "../dtos/auth/login-user.dto";
 
 export class AuthService{
     constructor(){}
@@ -24,5 +25,24 @@ export class AuthService{
             throw CustomError.internalServerError("error creating user")
         }
         
+    }
+
+    async loginUser(userDto:LoginUserDto){
+     try{
+        const user = await UserModel.findOne({email:userDto.email})
+
+        if(!user) throw CustomError.badRequest("email or password is incorrect")
+
+        const isPasswordValid = await bcryptAdapter.compare(userDto.password,user.password)
+
+        if(!isPasswordValid) throw CustomError.badRequest("email or password is incorrect")
+        
+        const userEntity = UserEntity.fromObject(user);
+        const {password, ...userWithoutPassword} = userEntity;
+        return userWithoutPassword;
+     }catch(error){
+        console.log(error)
+        throw CustomError.internalServerError("error logging in user")
+     }
     }
 }
