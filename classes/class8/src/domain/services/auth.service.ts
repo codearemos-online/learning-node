@@ -2,7 +2,7 @@ import { UserModel } from "../../data";
 import { RegisterUserDto } from "../dtos/auth/register-user.dto";
 import { UserEntity } from "../entities/user.entity";
 import { CustomError } from "../errors/custom.error";
-import { bcryptAdapter } from "../../config";
+import { bcryptAdapter, JwtAdapter } from "../../config";
 import { LoginUserDto } from "../dtos/auth/login-user.dto";
 
 export class AuthService{
@@ -39,7 +39,11 @@ export class AuthService{
         
         const userEntity = UserEntity.fromObject(user);
         const {password, ...userWithoutPassword} = userEntity;
-        return userWithoutPassword;
+        const token = await JwtAdapter.generateToken(userWithoutPassword)
+        return {
+            user: userWithoutPassword,
+            token
+        };
      }catch(error){
         console.log(error)
         throw CustomError.internalServerError("error logging in user")
