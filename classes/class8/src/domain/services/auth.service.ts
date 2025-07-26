@@ -20,7 +20,11 @@ export class AuthService{
             await user.save();
             const userEntity = UserEntity.fromObject(user);
             const {password, ...userWithoutPassword} = userEntity;
-            return userWithoutPassword;
+            const token = await JwtAdapter.generateToken(userWithoutPassword)
+            return {
+                user: userWithoutPassword,
+                token
+            };
         }catch(error){
             throw CustomError.internalServerError("error creating user")
         }

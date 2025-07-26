@@ -11,4 +11,12 @@ export class JwtAdapter{
             throw error;
         }
     }
+
+    static async verifyToken(token: string){
+        try {
+            return jwt.verify(token, JWT_SECRET);
+        } catch (error) {
+            throw error;
+        }
+    }
 }   
