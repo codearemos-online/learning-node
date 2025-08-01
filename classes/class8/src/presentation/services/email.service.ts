@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { Transporter } from 'nodemailer';
 import { envs } from '../../config/envs';
 
 export interface Attachment{
@@ -15,14 +15,18 @@ export interface EmailOptions{
 
 export class EmailService{
 
-    private transporter = nodemailer.createTransport({
-        service: envs.MAIL_SERVICE,
-        auth: {
-            user: envs.MAILER_EMAIL,
-            pass: envs.MAILER_SECRET_KEY
-        }
-    })
+    private transporter:Transporter;
 
+    constructor(){
+        this.transporter = nodemailer.createTransport({
+            service: envs.MAIL_SERVICE,
+            auth: {
+                user: envs.MAILER_EMAIL,
+                pass: envs.MAILER_SECRET_KEY
+            }
+        })
+    }
+    
     async sendData(options:EmailOptions){
         try{
             const {to,subject,htmlBody,attachments} = options;
@@ -38,5 +42,7 @@ export class EmailService{
             return false;
         }
     }
+
+
 
 }

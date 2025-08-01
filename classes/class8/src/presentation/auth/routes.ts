@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import { AuthController } from './controller';
-import { AuthService } from '../../domain/services/auth.service';
+import { AuthService, EmailService  } from '../services';
+
 
 export class AuthRoutes {
 
     static get routes(): Router {
 
-        const controller = new AuthController(new AuthService());
+        const controller = new AuthController(new AuthService(new EmailService()));
         const router = Router();
         router.post('/login', controller.login);
         router.post('/register', controller.register);
