@@ -6,7 +6,7 @@ export class CreateCategoryDto{
 
     static create(object:{[key:string]:any}):[string?,CreateCategoryDto?]{
         const { name,available = false } = object;
-        if(!name) ['name is required'];
+        if(!name) return ['name is required'];
 
         return [undefined,new CreateCategoryDto(name,available)];
     }
