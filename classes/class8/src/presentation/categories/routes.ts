@@ -7,6 +7,7 @@ export class CategoryRoutes{
         const controller = new CategoryController();
 
         router.get('/',controller.getAll);
+        router.post('/',controller.create)
 
         return router;
     }
