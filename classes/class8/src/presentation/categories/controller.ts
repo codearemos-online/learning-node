@@ -9,7 +9,8 @@ export class CategoryController{
     }
 
     create = (req:Request,res:Response) => {
-        const createCategoryDto = CreateCategoryDto.create(req.body)
+        const [error,createCategoryDto] = CreateCategoryDto.create(req.body)
+        if(error) res.status(400).json(error)
         res.json({
             createCategoryDto
         })
