@@ -12,7 +12,7 @@ export class JwtAdapter{
         }
     }
 
-    static async verifyToken(token: string){
+    static async verifyToken<T>(token: string):Promise<T|null>{
         try {
             return jwt.verify(token, JWT_SECRET);
         } catch (error) {
