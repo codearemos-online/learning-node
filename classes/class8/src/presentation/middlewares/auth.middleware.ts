@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { JwtAdapter } from "../../config";
 import { UserModel } from "../../data";
+import { UserEntity } from "../../domain";
 
 export class AuthMiddleware {
     static async jwt(req: Request, res: Response, next: NextFunction) {
@@ -16,6 +17,11 @@ export class AuthMiddleware {
             
             const user = await UserModel.findById(payload.id)
             if(!user) return res.status(401).json({ error:'Invalid token - user' })
+
+            req.body.user = UserEntity.fromObject(user);
+
+            next();
+                
         } catch (error) {
             console.log(error)
             res.status(500).json({ error: "Internal server error" })
