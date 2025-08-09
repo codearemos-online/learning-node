@@ -74,7 +74,9 @@ export class AuthService{
 
     public async validateToken(token:string){
         try{
-            const payload = await JwtAdapter.verifyToken(token)
+            const payload = await JwtAdapter.verifyToken<{email: string}>(token)
+            if(!payload) throw CustomError.badRequest("Invalid token")
+            
             const {email} = payload;
             if(!email) throw CustomError.badRequest("Email not found")
             const user = await UserModel.findOne({email})
