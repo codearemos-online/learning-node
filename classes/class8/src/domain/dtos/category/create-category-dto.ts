@@ -1,7 +1,7 @@
 export class CreateCategoryDto{
     private constructor(
-        private readonly name:string,
-        private readonly available:string
+        public readonly name:string,
+        public readonly available:string
     ){}
 
     static create(object:{[key:string]:any}):[string?,CreateCategoryDto?]{
