@@ -1,11 +1,17 @@
 import { CategoryModel } from "../../data";
 import { CreateCategoryDto, CustomError, UserEntity } from "../../domain";
+import { PaginationDto } from "../../domain/dtos/shared/pagination-dto";
 
 export class CategoryService {
 
-    async getAll() {
+    async getAll(paginationDto:PaginationDto) {
+        
+        const {page,limit} = paginationDto;
+
         try {
-            const categories = await CategoryModel.find({}, { name: 1, available: 1 });
+            const categories = await CategoryModel.find({}, { name: 1, available: 1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
             return categories;
         }
         catch (error) {
