@@ -9,10 +9,21 @@ export class CategoryService {
         const {page,limit} = paginationDto;
 
         try {
-            const categories = await CategoryModel.find({}, { name: 1, available: 1 })
-            .skip((page - 1) * limit)
-            .limit(limit);
-            return categories;
+            const [total, categories] = await Promise.all([
+                await CategoryModel.countDocuments(),
+                await CategoryModel.find({}, { name: 1, available: 1 })
+                .skip((page - 1) * limit)
+                .limit(limit)
+            ])
+            
+            return {
+                categories,
+                page,
+                limit,
+                total,
+                next: (page+1 <= Math.ceil(total / limit)) ?  `api/categories?page=${page + 1}&limit=${limit}` : null,
+                prev: (page - 1 > 0) ? `api/categories?page=${page - 1}&limit=${limit}` : null,
+            };
         }
         catch (error) {
             throw CustomError.internalServerError(`something is wrong with categories`)
