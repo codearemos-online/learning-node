@@ -8,7 +8,7 @@ export class ProductRoutes {
         const controller = new ProductController(new ProductService());
 
         router.get('/',controller.getAll);
-
+        router.post('/',controller.save);
         return router;
     }
 }

@@ -15,4 +15,11 @@ export class ProductController {
             message: 'Hello World'
         })
     }
+    
+    save = (req:Request,res:Response) => {
+        res.json({
+            message: 'Hello World Save'
+        })
+    }
+
 }
